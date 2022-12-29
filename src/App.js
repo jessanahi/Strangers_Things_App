@@ -1,14 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Route } from 'react-router-dom'
-import Login from './Login.js';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Register from './Register.js';
 
 function App() {
-  const [postList, setPostList] = useState([])
+  const [postList, setPostList] = useState([]);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
     <>
-      <Register />
-      <Login />
+      <Router>
+        <Routes>
+          <Route
+            exact
+            path='/register'
+            element={
+              <Register
+                username={username}
+                password={password}
+                setUsername={setUsername}
+                setPassword={setPassword}
+              />
+            }
+          />
+          <Route />
+          <Route />
+        </Routes>
+      </Router>
     </>
   );
 }
