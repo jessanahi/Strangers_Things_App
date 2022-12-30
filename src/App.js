@@ -1,12 +1,24 @@
-import React, { useState, useEffect } from 'react';
-//import { Switch, Route } from 'react-router-dom';
-//import Register from './Register.js';
-//import Login from './Login';
+import React, { useState } from 'react';
+import axios from 'axios';
+
+const URL = {
+  postsURL: 'https://strangers-things.herokuapp.com/api/2209-FTB-ET-WEB-PT/posts',
+
+  registerURL: 'https://strangers-things.herokuapp.com/api/2209-FTB-ET-WEB-PT/users/register',
+
+  loginURL: 'https://strangers-things.herokuapp.com/api/2209-FTB-ET-WEB-PT/users/login',
+
+}
 
 function App() {
   // const [postList, setPostList] = useState([]);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  // helper function for the username and password inputs
+  const setTargetValue = (callback) => {
+    return (e) => callback(e.target.value);
+  };
 
   return (
     <>
@@ -16,14 +28,15 @@ function App() {
         <fieldset>
           <legend>Register</legend>
           <input 
-            value={username}placeholder='Username'
-            onChange={(e) => {setUsername(e.target.value)}} />
+            value={username}
+            placeholder='Username'
+            onChange={setTargetValue(setUsername)} />
           &nbsp;
           <input 
             value={password}
             type={'password'}
             placeholder='Password'
-            onChange={(e) => {setPassword(e.target.value)}} />
+            onChange={setTargetValue(setPassword)} />
           &nbsp;
           <button>Submit</button>
         </fieldset>
