@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Register from './Register.js';
+import Login from './Login';
 
 function App() {
-  const [postList, setPostList] = useState([]);
+  // const [postList, setPostList] = useState([]);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   return (
     <>
-      <Router>
-        <Routes>
+
           <Route
             exact
             path='/register'
@@ -23,10 +23,20 @@ function App() {
               />
             }
           />
+          <Route
+            exact
+            path='/login'
+            element={
+              <Login
+                username={username}
+                password={password}
+                setUsername={setUsername}
+                setPassword={setPassword}
+              />
+            }
+          />
           <Route />
-          <Route />
-        </Routes>
-      </Router>
+
     </>
   );
 }
