@@ -1,14 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
-const URL = {
-  postsURL: 'https://strangers-things.herokuapp.com/api/2209-FTB-ET-WEB-PT/posts',
-
-  registerURL: 'https://strangers-things.herokuapp.com/api/2209-FTB-ET-WEB-PT/users/register',
-
-  loginURL: 'https://strangers-things.herokuapp.com/api/2209-FTB-ET-WEB-PT/users/login',
-
-}
+const registerURL = 'https://strangers-things.herokuapp.com/api/2209-FTB-ET-WEB-PT/users/register';
 
 function App() {
   // const [postList, setPostList] = useState([]);
@@ -24,7 +17,25 @@ function App() {
     <>
     <div>
       <h2>New User? Register to Join, Stranger!</h2>
-      <form>
+      <form
+        onSubmit={
+          async e => {
+            e.preventDefault();
+          
+          try {
+          const response = await axios.post(
+            registerURL, {
+            user: {username, password}}
+            );
+
+            console.log(response.data);
+        } catch (e) {
+          console.log('ERROR: Failed to register.');
+          console.error(e);
+        }
+      }
+      }
+      >
         <fieldset>
           <legend>Register</legend>
           <input 
