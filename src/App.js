@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { TOKEN_STORAGE_KEY } from './constants';
 import Register from './Register';
+import Login from './Login';
 import Posts from './Posts';
 import Sidebar from './Sidebar';
 import Header from './Header';
@@ -28,7 +29,7 @@ function App() {
 
   // helper function for the username and password inputs
   const setTargetValue = (callback) => {
-    return (e) => callback(e.target.value);
+    return (event) => callback(event.target.value);
   };
 
   return (
@@ -36,12 +37,22 @@ function App() {
       <Header />
       <main className={styles.main}>
         <Sidebar />
+
         <Switch>
           <Route exact path={'/home'}>
             <h1>Welcome to Stranger's Things</h1>
           </Route>
           <Route exact path={'/register'}>
             <Register
+              username={username}
+              password={password}
+              setUsername={setTargetValue(setUsername)}
+              setPassword={setTargetValue(setPassword)}
+              setToken={setAndStoreToken}
+            />
+          </Route>
+          <Route exact path={'/login'}>
+            <Login 
               username={username}
               password={password}
               setUsername={setTargetValue(setUsername)}
@@ -56,7 +67,6 @@ function App() {
               setPosts={setPosts} 
             />
           </Route>
-          
           <Route>
             <h1>Strange...Page Not Found</h1>
           </Route>
@@ -65,6 +75,6 @@ function App() {
       <Footer />
     </div>
   );
-}
+};
 
 export default App;

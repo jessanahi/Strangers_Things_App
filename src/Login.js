@@ -1,41 +1,37 @@
 import axios from 'axios';
-import { REGISTER_URL } from './constants';
+import { LOGIN_URL } from './constants';
 
-function Register({
-  username,
-  password,
-  setUsername,
-  setPassword,
-  setToken,
+function Login({ 
+    username, 
+    password, 
+    setUsername, 
+    setPassword, 
+    setToken 
 }) {
-  
+
   return (
     <div>
-      <h2>New User? Register to Join, Stranger!</h2>
+      <h2>Welcome back, Stranger!</h2>
       <form
         onSubmit={async (e) => {
           e.preventDefault();
 
           try {
-            const response = await axios.post(REGISTER_URL, {
+            const response = await axios.post(LOGIN_URL, {
               user: { username, password },
             });
 
             const responseToken = response.data.data.token;
-            
-            setToken(responseToken);
 
+            setToken(responseToken);
           } catch (e) {
-            console.log('ERROR: Failed to register.');
+            console.log('ERROR: Failed to login.');
             console.error(e);
           }
-          // Thought these would help reset the inputs after a successful registration or login but they break the code :(
-          // setUsername('');
-          // setPassword('');
         }}
       >
         <fieldset>
-          <legend>Register</legend>
+          <legend>Login</legend>
           <input
             value={username}
             placeholder='Username'
@@ -56,4 +52,4 @@ function Register({
   );
 }
 
-export default Register;
+export default Login;
