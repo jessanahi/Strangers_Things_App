@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import { TOKEN_STORAGE_KEY } from './constants';
 import Register from './Register';
 import Posts from './Posts';
-
+import Sidebar from './Sidebar';
+import Header from './Header';
+import Footer from './Footer';
+import styles from './App.module.css';
 
 function App() {
   const [username, setUsername] = useState('');
@@ -20,34 +24,47 @@ function App() {
     const storageToken = localStorage.getItem(TOKEN_STORAGE_KEY);
 
     setToken(storageToken);
-    }, []);
+  }, []);
 
   // helper function for the username and password inputs
   const setTargetValue = (callback) => {
     return (e) => callback(e.target.value);
   };
 
-  if (!token) {
-    return (
-      <div>
-        <Register 
-        username={username}
-        password={password}
-        setUsername={setTargetValue(setUsername)}
-        setPassword={setTargetValue(setPassword)}
-        setToken={setAndStoreToken}
-        />
-      </div>
-    );
-  }
-
   return (
-     <Posts 
-      token={token}
-      posts={posts}
-      setPosts={setPosts}
-     />
-  )
-};
+    <div>
+      <Header />
+      <main className={styles.main}>
+        <Sidebar />
+        <Switch>
+          <Route exact path={'/home'}>
+            <h1>Welcome to Stranger's Things</h1>
+          </Route>
+          <Route exact path={'/register'}>
+            <Register
+              username={username}
+              password={password}
+              setUsername={setTargetValue(setUsername)}
+              setPassword={setTargetValue(setPassword)}
+              setToken={setAndStoreToken}
+            />
+          </Route>
+          <Route exact path={'/posts'}>
+            <Posts 
+              token={token} 
+              posts={posts} 
+              setPosts={setPosts} 
+            />
+          </Route>
+          
+          <Route>
+            <h1>Strange...Page Not Found</h1>
+          </Route>
+        </Switch>
+      </main>
+      <Footer />
+    </div>
+  );
+}
 
 export default App;

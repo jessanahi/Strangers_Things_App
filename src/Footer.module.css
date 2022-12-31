@@ -1,0 +1,5 @@
+.footer {
+    display: flex;
+    justify-content: space-evenly;
+    border: solid 2px darkred;
+}
