@@ -1,19 +1,21 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { TOKEN_STORAGE_KEY } from './constants';
+import Register from './Register';
+import Posts from './Posts';
 
-const registerURL = 'https://strangers-things.herokuapp.com/api/2209-FTB-ET-WEB-PT/users/register';
-
-const postsURL = 'https://strangers-things.herokuapp.com/api/2209-FTB-ET-WEB-PT/posts';
-
-const TOKEN_STORAGE_KEY = 'strange_token';
 
 function App() {
-  // const [postList, setPostList] = useState([]);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState('');
 
+  const setAndStoreToken = (responseToken) => {
+    localStorage.setItem(TOKEN_STORAGE_KEY, responseToken);
+    setToken(responseToken);
+  };
+
+  // When loading page first time, we want to know if there is a token in local storage.
   useEffect(() => {
     const storageToken = localStorage.getItem(TOKEN_STORAGE_KEY);
 
@@ -27,81 +29,25 @@ function App() {
 
   if (!token) {
     return (
-      <>
       <div>
-        <h2>New User? Register to Join, Stranger!</h2>
-        <form
-          onSubmit={
-            async e => {
-              e.preventDefault();
-            
-            try {
-            const response = await axios.post(
-              registerURL, {
-              user: {username, password}}
-              );
-
-              const responseToken = response.data.data.token;
-              localStorage.setItem(TOKEN_STORAGE_KEY, responseToken)
-              setToken(responseToken);
-            } catch (e) {
-              console.log('ERROR: Failed to register.');
-              console.error(e);
-            }
-            setUsername('');
-            setPassword('');
-        }}
-        >
-          <fieldset>
-            <legend>Register</legend>
-            <input 
-              value={username}
-              placeholder='Username'
-              onChange={setTargetValue(setUsername)} />
-            &nbsp;
-            <input 
-              value={password}
-              type={'password'}
-              placeholder='Password'
-              onChange={setTargetValue(setPassword)} />
-            &nbsp;
-            <button>Submit</button>
-          </fieldset>
-        </form>
+        <Register 
+        username={username}
+        password={password}
+        setUsername={setTargetValue(setUsername)}
+        setPassword={setTargetValue(setPassword)}
+        setToken={setAndStoreToken}
+        />
       </div>
-      </>
     );
   }
 
   return (
-    <div>
-      <button
-        onClick={
-          async () => {
-            try {
-            const response = await axios.get(postsURL, {
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
-              }
-            });
-            setPosts(response.data.data.posts);
-            } catch (e) {
-              console.log('ERROR??? No posts fetched.');
-              console.error(e);
-            }
-          }
-        }
-      >
-        See All Posts</button>
-      {
-        posts.map((post) => {
-          return (
-          <code>{JSON.stringify(post, null, 2)}</code>)
-        })}
-    </div>
-
+     <Posts 
+      token={token}
+      posts={posts}
+      setPosts={setPosts}
+     />
   )
-}
+};
 
 export default App;
