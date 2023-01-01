@@ -4,7 +4,7 @@ import { TOKEN_STORAGE_KEY } from './constants';
 import Register from './Register';
 import Login from './Login';
 import Posts from './Posts';
-import Sidebar from './Sidebar';
+import Navibar from './Navibar';
 import Header from './Header';
 import Footer from './Footer';
 import { getUser } from './apiRequests';
@@ -50,11 +50,11 @@ function App() {
 
   return (
     <div>
-      <Header 
-        currentUser={user}
-      />
+      <Header />
       <main className={styles.main}>
-        <Sidebar />
+        <Navibar
+          currentUser={user}
+        />
 
         <Switch>
           <Route exact path={'/home'}>
