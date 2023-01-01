@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { LOGIN_URL } from './constants';
+import { login } from './apiRequests';
 
 function Login({ 
     username, 
@@ -16,19 +15,11 @@ function Login({
         onSubmit={async (e) => {
           e.preventDefault();
 
-          try {
-            const response = await axios.post(LOGIN_URL, {
-              user: { username, password },
-            });
+          const responseToken = await login(username, password);
 
-            const responseToken = response.data.data.token;
-
-            setToken(responseToken);
-          } catch (e) {
-            console.log('ERROR: Failed to login.');
-            console.error(e);
-          }
-        }}
+          setToken(responseToken);
+        }
+      }
       >
         <fieldset>
           <legend>Login</legend>
