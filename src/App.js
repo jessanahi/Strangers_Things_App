@@ -7,6 +7,7 @@ import Posts from './Posts';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import Footer from './Footer';
+import { getUser } from './apiRequests';
 import styles from './App.module.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
   const [password, setPassword] = useState('');
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState('');
+  const [user, setUser] = useState('');
 
   const setAndStoreToken = (responseToken) => {
     localStorage.setItem(TOKEN_STORAGE_KEY, responseToken);
@@ -27,14 +29,30 @@ function App() {
     setToken(storageToken);
   }, []);
 
-  // helper function for the username and password inputs
+  // This second useEffect is to manipulate rendering the header for whether a user is signed in or not.
+  useEffect(() => {
+    if (token) {
+      getUser(token)
+        .then((user) => {
+          setUser(user);
+        })
+        .catch((e) => {
+          throw new Error('ERROR: Failed to fetch User.')
+        })
+    };
+
+  }, [token]);
+
+  // Helper function for the username and password inputs.
   const setTargetValue = (callback) => {
     return (event) => callback(event.target.value);
   };
 
   return (
     <div>
-      <Header />
+      <Header 
+        currentUser={user}
+      />
       <main className={styles.main}>
         <Sidebar />
 

@@ -6,11 +6,11 @@ export async function getUser(token) {
     const response = await axios.get(USER_URL, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        'Authorization': `Bearer ${token}`,
       },
     });
 
-    const user = response.data.data.user;
+    const user = response.data.data;
 
     return user;
   } catch (e) {

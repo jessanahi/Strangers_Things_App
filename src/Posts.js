@@ -20,7 +20,7 @@ function Posts({ token, setPosts, posts }) {
           }
         }}
       >
-        See All Posts
+        See All Strange Posts
       </button>
 
       <ul>
