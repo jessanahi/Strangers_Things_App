@@ -66,3 +66,4 @@ export async function getPosts(token) {
     console.error(e);
   }
 };
+

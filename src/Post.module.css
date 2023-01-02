@@ -1,4 +1,4 @@
-.container {
+.postcontainer {
     display: flex;
     flex-direction: column;
     border: solid 1px red;

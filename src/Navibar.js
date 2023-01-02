@@ -10,7 +10,7 @@ function Navibar({ currentUser, logout }) {
           <>
             <div>Welcome, {currentUser.username}!</div>
             <Link to={'/posts'}>Strange Posts</Link>
-            <Link to={'/logout'}>Log Out</Link>
+            <Link to={'/logout'} logout={logout}>Log Out</Link>
           </>
         )
       }

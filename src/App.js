@@ -62,12 +62,10 @@ function App() {
   }, [token]);
 
   return (
-    <div>
+    <div className={styles.appcontainer}>
       <Header />
-
+      <Navibar currentUser={user} logout={logout} />
       <main className={styles.main}>
-        <Navibar currentUser={user} logout={logout} />
-
         <Switch>
           <Route exact path={'/home'}>
             <h1>Welcome to Stranger's Things</h1>
@@ -114,7 +112,7 @@ function App() {
                   params: { postId },
                 },
               } = routeProps;
-              return <SinglePostView postId={postId} />;
+              return <SinglePostView postId={postId} posts={posts} />;
             }}
           ></Route>
 

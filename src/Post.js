@@ -8,7 +8,7 @@ function Post({ post }) {
     const history = useHistory();
 
     return (
-        <div className={styles.container}>
+        <div className={styles.postcontainer}>
             <h3>{title}</h3>
             <span>Listed By: {username}</span>
             <span>Posted On: {DateTime.fromISO(createdAt).toLocaleString(DateTime.DATE_MED)}</span>

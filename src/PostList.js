@@ -11,7 +11,7 @@ function PostList({ token, posts, setPosts }) {
       })
       .catch((e) => {
         console.error(
-          'ERROR: Unable to get post list; invalid token || sign in.'
+          'ERROR: Unable to get post list; invalid token or sign in.'
         );
       });
   }, [token, setPosts]);

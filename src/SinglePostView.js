@@ -1,7 +1,11 @@
+
+
 function SinglePostView({ postId }) {
 
     return (
-        <div>{postId}</div>
+        <div>
+            <h2>{postId}</h2>
+        </div>
     )
 }
 
