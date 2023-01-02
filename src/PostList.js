@@ -1,33 +1,26 @@
-import axios from 'axios';
-import { POSTS_URL } from './constants';
+import { useEffect } from 'react';
+import styles from './PostList.module.css';
+import { getPosts } from './apiRequests';
+import Post from './Post';
 
-function PostList({ token, setPosts, posts }) {
+function PostList({ token, posts, setPosts }) {
+  useEffect(() => {
+    getPosts()
+      .then((posts) => {
+        setPosts(posts);
+      })
+      .catch((e) => {
+        console.error(
+          'ERROR: Unable to get post list; invalid token || sign in.'
+        );
+      });
+  }, [token]);
+
   return (
-    <div className='styles.postList'>
-      <button
-        onClick={async () => {
-          try {
-            const response = await axios.get(POSTS_URL, {
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-              },
-            });
-            setPosts(response.data.data.posts);
-          } catch (e) {
-            console.log('ERROR??? No posts fetched.');
-            console.error(e);
-          }
-        }}
-      >
-        See All Strange Posts
-      </button>
-
-      <ul>
-        {posts.map((post) => {
-          return <li key={post._id}>{post.title}</li>;
-        })}
-      </ul>
+    <div className={styles.container}>
+      {posts.map((post) => {
+        return <Post key={post._id} post={post} />
+      })}
     </div>
   );
 }

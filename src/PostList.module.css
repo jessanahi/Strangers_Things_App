@@ -1,0 +1,9 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    border-right: solid 2px red;
+    max-width: 33.33%;
+    max-height: 100vh;
+    overflow-y: scroll;
+    padding: 5px;
+}

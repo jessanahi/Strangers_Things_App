@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { USER_URL, LOGIN_URL, REGISTER_URL } from './constants';
+import { USER_URL, LOGIN_URL, REGISTER_URL, POSTS_URL } from './constants';
 
 export async function getUser(token) {
   try {
@@ -17,7 +17,7 @@ export async function getUser(token) {
     console.log('ERROR: Unable to get User data.');
     console.error(e);
   }
-}
+};
 
 export async function login(username, password) {
   try {
@@ -32,7 +32,7 @@ export async function login(username, password) {
     console.log('ERROR: Failed to login.');
     console.error(e);
   }
-}
+};
 
 export async function register(username, password) {
   try {
@@ -47,4 +47,22 @@ export async function register(username, password) {
     console.log('ERROR: Failed to register.');
     console.error(e);
   }
-}
+};
+
+export async function getPosts(token) {
+  try {
+    const response = await axios.get(POSTS_URL, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const postList = response.data.data.posts;
+
+    return postList;
+  } catch (e) {
+    console.log('ERROR??? No posts fetched.');
+    console.error(e);
+  }
+};

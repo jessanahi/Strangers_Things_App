@@ -18,10 +18,6 @@ function Register({
             const responseToken = await register(username, password);
             
             setToken(responseToken);
-
-          // Thought these would help reset the inputs after a successful registration or login but they just break the code :(
-          // setUsername('');
-          // setPassword('');
         }
       }
       >

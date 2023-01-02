@@ -51,6 +51,7 @@ function App() {
   return (
     <div>
       <Header />
+
       <main className={styles.main}>
         <Navibar
           currentUser={user}
@@ -60,6 +61,7 @@ function App() {
           <Route exact path={'/home'}>
             <h1>Welcome to Stranger's Things</h1>
           </Route>
+
           <Route exact path={'/register'}>
             <Register
               username={username}
@@ -69,6 +71,7 @@ function App() {
               setToken={setAndStoreToken}
             />
           </Route>
+
           <Route exact path={'/login'}>
             <Login 
               username={username}
@@ -78,6 +81,7 @@ function App() {
               setToken={setAndStoreToken}
             />
           </Route>
+
           <Route exact path={'/posts'}>
             <PostList 
               token={token} 
@@ -85,11 +89,14 @@ function App() {
               setPosts={setPosts} 
             />
           </Route>
+
           <Route>
             <h1>Strange...Page Not Found</h1>
           </Route>
         </Switch>
+
       </main>
+
       <Footer />
     </div>
   );
