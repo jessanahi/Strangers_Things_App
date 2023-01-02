@@ -14,12 +14,14 @@ function PostList({ token, posts, setPosts }) {
           'ERROR: Unable to get post list; invalid token || sign in.'
         );
       });
-  }, [token]);
+  }, [token, setPosts]);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.postlist}>
       {posts.map((post) => {
-        return <Post key={post._id} post={post} />
+        return ( 
+          <Post key={post._id} post={post} />
+        )
       })}
     </div>
   );

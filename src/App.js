@@ -9,6 +9,7 @@ import Header from './Header';
 import Footer from './Footer';
 import { getUser } from './apiRequests';
 import styles from './App.module.css';
+import SinglePostView from './SinglePostView';
 
 function App() {
   const [username, setUsername] = useState('');
@@ -88,6 +89,21 @@ function App() {
               posts={posts} 
               setPosts={setPosts} 
             />
+          </Route>
+
+          <Route
+            exact path={'/posts/:postId'}
+            render={(routeProps) => {
+              const {
+                match: {
+                  params: {
+                    postId,
+                  }
+                }
+              } = routeProps;
+              return <SinglePostView postId={postId} />
+            }}
+          >
           </Route>
 
           <Route>

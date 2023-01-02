@@ -1,4 +1,4 @@
-.container {
+.postlist {
     display: flex;
     flex-direction: column;
     border-right: solid 2px red;
