@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { POSTS_URL } from './constants';
 
-function Posts({ token, setPosts, posts }) {
+function PostList({ token, setPosts, posts }) {
   return (
-    <div>
+    <div className='styles.postList'>
       <button
         onClick={async () => {
           try {
@@ -32,4 +32,4 @@ function Posts({ token, setPosts, posts }) {
   );
 }
 
-export default Posts;
+export default PostList;

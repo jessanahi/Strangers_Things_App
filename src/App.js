@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import { TOKEN_STORAGE_KEY } from './constants';
 import Register from './Register';
 import Login from './Login';
-import Posts from './Posts';
+import PostList from './PostList';
 import Navibar from './Navibar';
 import Header from './Header';
 import Footer from './Footer';
@@ -79,7 +79,7 @@ function App() {
             />
           </Route>
           <Route exact path={'/posts'}>
-            <Posts 
+            <PostList 
               token={token} 
               posts={posts} 
               setPosts={setPosts} 

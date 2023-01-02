@@ -1,5 +1,10 @@
 .footer {
     display: flex;
-    justify-content: space-evenly;
-    border: solid 2px darkred;
+    bottom: 0;
+    width: 100vw;
+    max-height: 10em;
+    border: solid 2px red;
+    justify-content: center;
+    color: red;
+    background-color: rgb(0, 0, 0);
 }
