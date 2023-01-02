@@ -25,6 +25,6 @@ function PostList({ token, posts, setPosts }) {
       })}
     </div>
   );
-}
+};
 
 export default PostList;

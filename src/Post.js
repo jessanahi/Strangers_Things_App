@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import styles from './Post.module.css';
 
 function Post({ post }) {
