@@ -3,6 +3,7 @@ import styles from './PostList.module.css';
 import { getPosts } from './apiRequests';
 import Post from './Post';
 
+
 function PostList({ token, posts, setPosts }) {
   useEffect(() => {
     getPosts()
@@ -18,6 +19,7 @@ function PostList({ token, posts, setPosts }) {
 
   return (
     <div className={styles.postlist}>
+      
       {posts.map((post) => {
         return ( 
           <Post key={post._id} post={post} />

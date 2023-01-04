@@ -67,3 +67,28 @@ export async function getPosts(token) {
   }
 };
 
+export async function addpost(token) {
+  try {
+    const response = await axios.post(POSTS_URL, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        post: {
+          // title: {title},
+          // description: {description},
+          // price: {price},
+          // location: {location}
+        }
+      })
+    });
+
+    const responsePost = response.data.data.post;
+
+    return responsePost;
+  } catch (e) {
+    console.log('ERROR: Failed to post your strange.');
+    console.error(e);
+  }
+};

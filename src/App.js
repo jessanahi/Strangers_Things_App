@@ -12,6 +12,8 @@ import styles from './App.module.css';
 import SinglePostView from './SinglePostView';
 import Logout from './Logout';
 import { DateTime } from 'luxon';
+import UserProfile from './UserProfile';
+
 
 function App() {
   const [username, setUsername] = useState('');
@@ -34,7 +36,7 @@ function App() {
     setUser(null);
   }, []);
 
-  // Helper function for the username and password inputs.
+  // Helper function for the username and password inputs. - ALSO OTHER INPUTS
   const setTargetValue = useCallback((callback) => {
     return (eventOrString) => {
       callback(eventOrString?.target?.value || eventOrString);
@@ -115,6 +117,10 @@ function App() {
               return <SinglePostView postId={postId} posts={posts} />;
             }}
           ></Route>
+
+          <Route>
+            <UserProfile />
+          </Route>
 
           <Route>
             <h1>Strange...Page Not Found</h1>
